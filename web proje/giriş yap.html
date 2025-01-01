@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdurrahman Alaya</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+        .container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            text-align: center;
+        }
+        .container h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .container p {
+            font-size: 14px;
+            color: #666;
+        }
+        .container input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .container button {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background 0.3s ease;
+        }
+        .container button:hover {
+            background: linear-gradient(135deg, #2575fc, #6a11cb);
+        }
+        .container a {
+            display: block;
+            margin-top: 15px;
+            color: #2575fc;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .container a:hover {
+            text-decoration: underline;
+        }
+        .footer-links {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        .footer-links ul li {
+            margin: 0;
+        }
+        .footer-links ul li a {
+            background: linear-gradient(135deg, #85cfdb, #85cfdb);
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background 0.3s ease;
+        }
+        .footer-links ul li a:hover {
+            background: linear-gradient(135deg, #85cfdb, #85cfdb);
+            text-decoration: none;
+        }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px 5px 0 0;
+            background: #f0f0f0;
+            margin: 0 5px;
+        }
+        .tab.active {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+        }
+        .form {
+            display: none;
+        }
+        .form.active {
+            display: block;
+        }
+        .success-message {
+            margin-top: 15px;
+            color: green;
+            font-size: 16px;
+            display: none;
+        }
+    </style>
+    <script>
+        function switchTab(tabName) {
+            document.querySelectorAll('.form').forEach(form => form.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+
+            document.getElementById(tabName).classList.add('active');
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const successMessage = document.getElementById('success-login');
+            successMessage.style.display = 'block';
+        }
+
+        function handleRegister(event) {
+            event.preventDefault();
+            const successMessage = document.getElementById('success-register');
+            successMessage.style.display = 'block';
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="tabs">
+            <div class="tab active" data-tab="login" onclick="switchTab('login')">Giriş Yap</div>
+            <div class="tab" data-tab="register" onclick="switchTab('register')">Üye Ol</div>
+        </div>
+        
+        <div id="login" class="form active">
+            <h1>Giriş Yap</h1>
+            <p>Lütfen kullanıcı adınızı ve şifrenizi girin.</p>
+            <form action="/login" method="POST" onsubmit="handleLogin(event)">
+                <input type="text" name="username" placeholder="Kullanıcı Adı" required>
+                <input type="password" name="password" placeholder="Şifre" required>
+                <button type="submit">Giriş Yap</button>
+            </form>
+            <p id="success-login" class="success-message">Giriş yapıldı!</p>
+            <a href="#">Şifremi unuttum?</a>
+        </div>
+
+        <div id="register" class="form">
+            <h1>Üye Ol</h1>
+            <p>Lütfen aşağıdaki bilgileri doldurun.</p>
+            <form action="/register" method="POST" onsubmit="handleRegister(event)">
+                <input type="text" name="username" placeholder="Kullanıcı Adı" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Şifre" required>
+                <input type="password" name="confirm_password" placeholder="Şifre Tekrar" required>
+                <button type="submit">Üye Ol</button>
+            </form>
+            <p id="success-register" class="success-message">Kayıt işlemi başarılı!</p>
+        </div>
+    </div>
+    
+    <div class="footer-links">
+        <ul>
+            <li><a href="index.html">Ana Sayfa</a></li>
+            <li><a href="about.html">Hakkında</a></li>
+            <li><a href="kurslarımız.html">Kurslarımız</a></li>
+            <li><a href="bize ulşın.html">İletişim</a></li>
+        </ul>
+    </div>
+</body>
+</html>
